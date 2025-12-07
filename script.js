@@ -60,11 +60,42 @@ function confettiLoop(){ ctx.clearRect(0,0,W,H); if(confettiOn){ particles.forEa
 confettiLoop();
 
 // Toggle confetti button
-const confBtn = document.getElementById('toggleConfetti');
-confBtn.addEventListener('click', ()=>{
-  confettiOn = !confettiOn;
-  confBtn.textContent = confettiOn ? 'Detener confetti' : 'Activar confetti';
-});
+// Mensajes aleatorios y botón "Mensaje para ti"
+const messages = [
+  "Mi amor, cada día a tu lado es mi favorito. — Abdel",
+  "Eres mi persona favorita. Te amo más de lo que las palabras pueden decir.",
+  "Gracias por formar parte de mi vida. Cada momento contigo es un regalo.",
+  "Tu sonrisa hace que todo valga la pena. Siempre tuyo.",
+  "Hoy, mañana y siempre: te quiero infinito.",
+  "Cada día contigo es una nueva aventura. Gracias por estar.",
+];
+
+const messageBtn = document.getElementById('showMessage');
+const messageBox = document.getElementById('dailyMessage');
+
+function closeMessage(){ if(messageBox){ messageBox.classList.remove('show'); messageBox.hidden = true; } }
+
+function showMessage(text){
+  if(!messageBox) return;
+  messageBox.innerHTML = `<button class="close-btn" aria-label="Cerrar">✕</button><div class="message-content">${text}</div>`;
+  messageBox.classList.add('show');
+  messageBox.hidden = false;
+  const closeBtn = messageBox.querySelector('.close-btn');
+  closeBtn.addEventListener('click', closeMessage);
+  // Cerrar con Escape
+  function onKey(e){ if(e.key === 'Escape'){ closeMessage(); window.removeEventListener('keydown', onKey); } }
+  window.addEventListener('keydown', onKey);
+  // Pequeño confetti de celebración al mostrar mensaje
+  confettiOn = true;
+  setTimeout(()=>{ confettiOn = false; }, 2200);
+}
+
+if(messageBtn){
+  messageBtn.addEventListener('click', ()=>{
+    const idx = Math.floor(Math.random() * messages.length);
+    showMessage(messages[idx]);
+  });
+}
 
 // Accessibility: allow Enter to play music from keyboard when focused
 playBtn.addEventListener('keyup', (e)=>{ if(e.key === 'Enter') playBtn.click(); });
