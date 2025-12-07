@@ -1,25 +1,20 @@
 // ----- CONFIG -----
-// Cambia esta fecha al día/horario de vuestro aniversario (formato: 'YYYY-MM-DDTHH:MM:SS')
-const targetDate = new Date('2025-12-05T00:00:00');
+// Fecha de inicio de la relación (formato: 'YYYY-MM-DDTHH:MM:SS')
+const startDate = new Date('2023-12-05T00:00:00');
 
 // Si quieres reproducir una canción local, pon la ruta en bgMusic.src o deja vacío.
 const bgMusic = document.getElementById('bgMusic');
 
-// ----- COUNTDOWN -----
+// ----- COUNTDOWN (contador del tiempo transcurrido) -----
 function updateCountdown(){
   const now = new Date();
-  const diff = targetDate - now;
-  if(diff <= 0){
-    document.getElementById('days').textContent = 0;
-    document.getElementById('hours').textContent = '00';
-    document.getElementById('minutes').textContent = '00';
-    document.getElementById('seconds').textContent = '00';
-    return;
-  }
+  const diff = now - startDate;
+  
   const sec = Math.floor((diff/1000) % 60);
   const min = Math.floor((diff/1000/60) % 60);
   const hr = Math.floor((diff/1000/60/60) % 24);
   const days = Math.floor(diff/1000/60/60/24);
+  
   document.getElementById('days').textContent = days;
   document.getElementById('hours').textContent = String(hr).padStart(2,'0');
   document.getElementById('minutes').textContent = String(min).padStart(2,'0');
