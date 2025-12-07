@@ -68,6 +68,16 @@ const messages = [
   "Tu sonrisa hace que todo valga la pena. Siempre tuyo.",
   "Hoy, mañana y siempre: te quiero infinito.",
   "Cada día contigo es una nueva aventura. Gracias por estar.",
+  "Mi amor, contigo descubrí que la felicidad tiene nombre y mirada propia.",
+  "Eres mi lugar seguro, mi historia favorita y mi mejor casualidad.",
+  "Gracias por llenar mis días de paz y mi vida de sentido. A tu lado, todo encaja.",
+  "Tu risa es el sonido que me recuerda que vale la pena todo lo demás.",
+  "Te quiero en todas mis versiones, en todos mis días y en todos los futuros posibles.",
+  "Contigo no necesito imaginar finales felices; los vivo.",
+  "Cada día a tu lado confirma que elegí bien, que te elegiría mil veces más.",
+  "Eres ese ‘quédate’ que mi corazón repite incluso en silencio.",
+  "Si el tiempo se mide en momentos, los mejores de mi vida llevan tu nombre.",
+  "Mi amor, contigo aprendí que el hogar no siempre es un lugar: a veces es una persona.",
 ];
 
 const messageBtn = document.getElementById('showMessage');
