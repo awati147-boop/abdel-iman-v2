@@ -116,7 +116,7 @@ const surpriseError = document.getElementById('surpriseError');
 const loveLetterEl = document.getElementById('loveLetter');
 
 // Cambia esta clave si quieres una palabra secreta personalizada
-const surpriseKey = 'miamor';
+const surpriseKey = 'mi halal';
 
 const loveLetter = `Mi vida,\n\nHoy más que nunca quiero recordarte lo que significa tenerte a mi lado. Cada día contigo es un regalo que agradezco con todo mi corazón. Gracias por tu paciencia, tus risas y por ser mi refugio.\n\nPrometo seguir eligiéndote, cuidándote y creando recuerdos juntos. Feliz cumpleaños — que este día sea tan hermoso como tú eres para mí.\n\nCon todo mi amor,\nAbdel ❤️`;
 
