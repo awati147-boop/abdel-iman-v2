@@ -62,3 +62,6 @@ blockquote{background:#fff; padding:12px 14px; border-left:4px solid var(--accen
 .love-letter{margin-top:12px; background:linear-gradient(180deg,#fff8f9,#fff); padding:14px; border-radius:10px; white-space:pre-wrap}
 
 .controls button{background:var(--accent); color:white; border:0; padding:8px 12px; border-radius:8px; margin:0 6px; cursor:pointer}
+
+/* pista dentro del modal */
+.hint{margin-top:8px; color:#14532d; background:#ecfdf5; padding:8px 10px; border-radius:8px; border:1px solid #bbf7d0}

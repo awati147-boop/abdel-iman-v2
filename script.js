@@ -113,6 +113,7 @@ const surpriseModal = document.getElementById('surpriseModal');
 const surpriseInput = document.getElementById('surpriseInput');
 const surpriseSubmit = document.getElementById('surpriseSubmit');
 const surpriseError = document.getElementById('surpriseError');
+const surpriseHint = document.getElementById('surpriseHint');
 const loveLetterEl = document.getElementById('loveLetter');
 
 // Cambia esta clave si quieres una palabra secreta personalizada
@@ -124,7 +125,11 @@ function openSurpriseModal(){
   if(!surpriseModal) return;
   surpriseModal.hidden = false; surpriseModal.setAttribute('aria-hidden','false');
   if(surpriseInput) surpriseInput.value = '';
-  if(surpriseError) surpriseError.hidden = true; if(loveLetterEl) { loveLetterEl.hidden = true; loveLetterEl.innerHTML = ''; }
+  if(surpriseError) surpriseError.hidden = true;
+  if(surpriseHint) surpriseHint.hidden = true;
+  if(loveLetterEl) { loveLetterEl.hidden = true; loveLetterEl.innerHTML = ''; }
+  // reset intentos fallidos
+  window.__surpriseFailedAttempts = 0;
   setTimeout(()=> { if(surpriseInput) surpriseInput.focus(); }, 60);
 }
 
@@ -141,12 +146,17 @@ function handleSurpriseSubmit(){
     // Mostrar carta
     if(loveLetterEl){ loveLetterEl.textContent = loveLetter; loveLetterEl.hidden = false; }
     if(surpriseError) surpriseError.hidden = true;
+    if(surpriseHint) surpriseHint.hidden = true;
+    window.__surpriseFailedAttempts = 0;
     // Celebración: confetti y reproducir música si es posible
     confettiOn = true;
     setTimeout(()=>{ confettiOn = false; }, 6000);
     try{ if(bgMusic && bgMusic.paused){ bgMusic.play().catch(()=>{}); if(playBtn) playBtn.textContent = 'Pausar música'; } }catch(e){}
   } else {
     if(surpriseError){ surpriseError.textContent = 'Palabra incorrecta. Intenta otra vez.'; surpriseError.hidden = false; }
+    // incrementar intentos y mostrar pista
+    window.__surpriseFailedAttempts = (window.__surpriseFailedAttempts || 0) + 1;
+    if(window.__surpriseFailedAttempts >= 1 && surpriseHint){ surpriseHint.textContent = 'mi....'; surpriseHint.hidden = false; }
     // pequeña vibración visual
     try{ const mc = surpriseModal.querySelector('.modal-content'); if(mc && mc.animate) mc.animate([{transform:'translateX(-6px)'},{transform:'translateX(6px)'},{transform:'translateX(0)'}],{duration:240}); }catch(e){}
   }
