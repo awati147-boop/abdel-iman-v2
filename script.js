@@ -107,6 +107,61 @@ if(messageBtn){
   });
 }
 
+// ----- SORPRESA: palabra clave y carta de amor -----
+const surpriseBtn = document.getElementById('surpriseBtn');
+const surpriseModal = document.getElementById('surpriseModal');
+const surpriseInput = document.getElementById('surpriseInput');
+const surpriseSubmit = document.getElementById('surpriseSubmit');
+const surpriseError = document.getElementById('surpriseError');
+const loveLetterEl = document.getElementById('loveLetter');
+
+// Cambia esta clave si quieres una palabra secreta personalizada
+const surpriseKey = 'miamor';
+
+const loveLetter = `Mi vida,\n\nHoy más que nunca quiero recordarte lo que significa tenerte a mi lado. Cada día contigo es un regalo que agradezco con todo mi corazón. Gracias por tu paciencia, tus risas y por ser mi refugio.\n\nPrometo seguir eligiéndote, cuidándote y creando recuerdos juntos. Feliz cumpleaños — que este día sea tan hermoso como tú eres para mí.\n\nCon todo mi amor,\nAbdel ❤️`;
+
+function openSurpriseModal(){
+  if(!surpriseModal) return;
+  surpriseModal.hidden = false; surpriseModal.setAttribute('aria-hidden','false');
+  if(surpriseInput) surpriseInput.value = '';
+  if(surpriseError) surpriseError.hidden = true; if(loveLetterEl) { loveLetterEl.hidden = true; loveLetterEl.innerHTML = ''; }
+  setTimeout(()=> { if(surpriseInput) surpriseInput.focus(); }, 60);
+}
+
+function closeSurpriseModal(){
+  if(!surpriseModal) return;
+  surpriseModal.hidden = true; surpriseModal.setAttribute('aria-hidden','true');
+}
+
+function handleSurpriseSubmit(){
+  if(!surpriseInput) return;
+  const val = surpriseInput.value.trim().toLowerCase();
+  if(!val){ if(surpriseError){ surpriseError.textContent = 'Introduce la palabra clave.'; surpriseError.hidden = false; } return; }
+  if(val === surpriseKey.toLowerCase()){
+    // Mostrar carta
+    if(loveLetterEl){ loveLetterEl.textContent = loveLetter; loveLetterEl.hidden = false; }
+    if(surpriseError) surpriseError.hidden = true;
+    // Celebración: confetti y reproducir música si es posible
+    confettiOn = true;
+    setTimeout(()=>{ confettiOn = false; }, 6000);
+    try{ if(bgMusic && bgMusic.paused){ bgMusic.play().catch(()=>{}); if(playBtn) playBtn.textContent = 'Pausar música'; } }catch(e){}
+  } else {
+    if(surpriseError){ surpriseError.textContent = 'Palabra incorrecta. Intenta otra vez.'; surpriseError.hidden = false; }
+    // pequeña vibración visual
+    try{ const mc = surpriseModal.querySelector('.modal-content'); if(mc && mc.animate) mc.animate([{transform:'translateX(-6px)'},{transform:'translateX(6px)'},{transform:'translateX(0)'}],{duration:240}); }catch(e){}
+  }
+}
+
+if(surpriseBtn){ surpriseBtn.addEventListener('click', openSurpriseModal); }
+if(surpriseSubmit){ surpriseSubmit.addEventListener('click', handleSurpriseSubmit); }
+if(surpriseInput){ surpriseInput.addEventListener('keyup', (e)=>{ if(e.key === 'Enter') handleSurpriseSubmit(); }); }
+// cerrar modal con el botón de cierre
+document.addEventListener('click', (e)=>{
+  if(e.target && e.target.classList && e.target.classList.contains('modal-close')) closeSurpriseModal();
+});
+// cerrar modal con Escape
+window.addEventListener('keydown', (e)=>{ if(e.key === 'Escape'){ if(surpriseModal && !surpriseModal.hidden) closeSurpriseModal(); } });
+
 // Accessibility: allow Enter to play music from keyboard when focused
 playBtn.addEventListener('keyup', (e)=>{ if(e.key === 'Enter') playBtn.click(); });
 

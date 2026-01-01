@@ -25,9 +25,25 @@
       <div class="controls">
         <button id="playMusic">Reproducir música</button>
         <button id="showMessage">Mensaje para ti 💌</button>
+        <button id="surpriseBtn">Sorpresa 🎁</button>
       </div>
     </div>
   </header>
+
+  <!-- Modal sorpresa: introducir palabra clave y mostrar carta de amor -->
+  <div id="surpriseModal" class="modal" aria-hidden="true" hidden>
+    <div class="modal-content">
+      <button class="modal-close" aria-label="Cerrar">✕</button>
+      <h2>Sorpresa</h2>
+      <p>Introduce la palabra clave para ver tu carta de amor:</p>
+      <input id="surpriseInput" type="text" placeholder="Palabra clave" aria-label="Palabra clave">
+      <div class="modal-actions">
+        <button id="surpriseSubmit">Abrir carta</button>
+      </div>
+      <div id="surpriseError" class="error" hidden></div>
+      <div id="loveLetter" class="love-letter" hidden aria-live="polite"></div>
+    </div>
+  </div>
 
   <main class="container">
     <section class="message">
