@@ -165,6 +165,47 @@ function handleSurpriseSubmit(){
 if(surpriseBtn){ surpriseBtn.addEventListener('click', openSurpriseModal); }
 if(surpriseSubmit){ surpriseSubmit.addEventListener('click', handleSurpriseSubmit); }
 if(surpriseInput){ surpriseInput.addEventListener('keyup', (e)=>{ if(e.key === 'Enter') handleSurpriseSubmit(); }); }
+
+// ----- MODAL DE VÍDEO -----
+const breakupVideoBtn = document.getElementById('breakupVideoBtn');
+const breakupVideoModal = document.getElementById('breakupVideoModal');
+const breakupVideo = document.getElementById('breakupVideo');
+const breakupVideoCloseBtn = breakupVideoModal ? breakupVideoModal.querySelector('.modal-close') : null;
+let breakupVideoOpener;
+
+function openBreakupVideoModal(){
+  if(!breakupVideoModal || !breakupVideo) return;
+  breakupVideoOpener = document.activeElement;
+  breakupVideoModal.hidden = false;
+  breakupVideoModal.setAttribute('aria-hidden','false');
+  if(breakupVideoCloseBtn) breakupVideoCloseBtn.focus();
+  breakupVideo.play().catch((error)=>{
+    if(error.name !== 'AbortError') console.error('No se pudo reproducir videos/video4.mp4:', error);
+  });
+}
+
+function closeBreakupVideoModal(){
+  if(!breakupVideoModal || breakupVideoModal.hidden) return;
+  breakupVideoModal.hidden = true;
+  breakupVideoModal.setAttribute('aria-hidden','true');
+  if(breakupVideo){
+    breakupVideo.pause();
+    breakupVideo.currentTime = 0;
+  }
+  if(breakupVideoOpener && typeof breakupVideoOpener.focus === 'function') breakupVideoOpener.focus();
+}
+
+if(breakupVideoBtn) breakupVideoBtn.addEventListener('click', openBreakupVideoModal);
+if(breakupVideoCloseBtn) breakupVideoCloseBtn.addEventListener('click', closeBreakupVideoModal);
+if(breakupVideoModal){
+  breakupVideoModal.addEventListener('click', (e)=>{
+    if(e.target === breakupVideoModal) closeBreakupVideoModal();
+  });
+}
+window.addEventListener('keydown', (e)=>{
+  if(e.key === 'Escape') closeBreakupVideoModal();
+});
+
 // cerrar modal con el botón de cierre
 document.addEventListener('click', (e)=>{
   if(e.target && e.target.classList && e.target.classList.contains('modal-close')) closeSurpriseModal();
@@ -277,4 +318,3 @@ if(photosEl){
     }
   });
 }
-

@@ -53,6 +53,7 @@ Luego habilita Pages en las configuraciones del repo.
 - **Colores:** Edita `:root { --accent:#ff6b81; }` en `styles.css`.
 - **Texto:** Cambia el contenido en los `<h1>`, `<p>`, `<blockquote>` de `index.html`.
 - **Fecha del countdown:** Edita `targetDate` en `script.js`.
+- **Vídeo del popup:** Coloca el vídeo en `videos/video4.mp4` para reproducirlo dentro de la página, sin abrir TikTok.
 
 ## 📞 Ayuda
 
@@ -64,4 +65,3 @@ Si necesitas cambiar algo o no ves las fotos/música:
 ---
 
 **Creado con ❤️ para Abdel & Iman — 2 años juntos.**
-

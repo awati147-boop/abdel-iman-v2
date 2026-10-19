@@ -60,8 +60,47 @@ blockquote{background:#fff; padding:12px 14px; border-left:4px solid var(--accen
 .modal-actions{display:flex; gap:8px; justify-content:flex-end}
 .error{color:#b00020; margin-top:8px}
 .love-letter{margin-top:12px; background:linear-gradient(180deg,#fff8f9,#fff); padding:14px; border-radius:10px; white-space:pre-wrap}
+.breakup-video-modal .modal-content{text-align:center; width:min(560px,94%); max-height:calc(100vh - 24px); overflow-y:auto}
+.breakup-video-frame{display:flex; justify-content:center; margin:12px 0}
+.breakup-video-frame video{display:block; width:auto; height:auto; max-width:100%; max-height:70vh; object-fit:contain; border-radius:12px; background:#000}
 
 .controls button{background:var(--accent); color:white; border:0; padding:8px 12px; border-radius:8px; margin:0 6px; cursor:pointer}
 
 /* pista dentro del modal */
 .hint{margin-top:8px; color:#14532d; background:#ecfdf5; padding:8px 10px; border-radius:8px; border:1px solid #bbf7d0}
+
+#breakupVideoBtn{
+  position:relative;
+  background:linear-gradient(135deg,#7c3aed,#c026d3);
+  box-shadow:0 4px 14px rgba(124,58,237,.4);
+  font-weight:700;
+  transition:transform .2s ease, box-shadow .2s ease;
+}
+#breakupVideoBtn::after{
+  content:"NUEVO";
+  position:absolute;
+  top:-10px;
+  right:-8px;
+  padding:3px 7px;
+  border:2px solid #fff;
+  border-radius:999px;
+  background:#facc15;
+  color:#422006;
+  font-size:.62rem;
+  line-height:1.2;
+  letter-spacing:.04em;
+}
+#breakupVideoBtn:hover{transform:translateY(-2px); box-shadow:0 7px 18px rgba(124,58,237,.5)}
+#breakupVideoBtn:focus-visible{outline:3px solid #facc15; outline-offset:3px}
+
+@media (max-width:600px){
+  .hero{height:auto; min-height:320px; padding:16px 0}
+  .overlay{padding:20px 16px}
+  .countdown{gap:8px}
+  .countdown > div{flex:1; min-width:0; padding:8px 6px}
+  .controls{display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:8px}
+  .controls button{margin:0; min-height:42px; padding:8px 6px}
+  .breakup-video-modal .modal-content{width:calc(100% - 24px); max-height:calc(100dvh - 24px); padding:16px}
+  .breakup-video-frame video{max-height:58dvh}
+  #breakupVideoBtn::after{right:-4px}
+}
